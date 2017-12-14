@@ -1,0 +1,35 @@
+{
+  "name": "listen",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel ./app/index.js -d dist",
+    "copy": "cpx ./app/**/*.{html,png,jpg} ./dist/app",
+    "electron": "node_modules/.bin/electron ./dist/app/index.js",
+    "build": "rimraf dist && npm run copy && npm run babel && npm run electron",
+    "start": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiasbeckerle/listen.git"
+  },
+  "keywords": [
+    "music"
+  ],
+  "author": "Matias Beckerle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matiasbeckerle/listen/issues"
+  },
+  "homepage": "https://github.com/matiasbeckerle/listen#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "cpx": "^1.5.0",
+    "electron": "^1.7.9",
+    "rimraf": "^2.6.2"
+  }
+}
