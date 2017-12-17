@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "babel": "babel ./app/index.js -d dist",
+    "clean": "rimraf dist",
     "copy": "cpx ./app/**/*.{html,png,jpg} ./dist/app",
     "electron": "node_modules/.bin/electron ./dist/app/index.js",
-    "build": "rimraf dist && npm run copy && npm run babel && npm run electron",
+    "eslint": "eslint ./app/**/*.js",
+    "build": "npm run eslint && npm run clean && npm run copy && npm run babel && npm run electron",
     "start": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,6 +32,7 @@
     "babel-preset-env": "^1.6.1",
     "cpx": "^1.5.0",
     "electron": "^1.7.9",
+    "eslint": "^4.13.1",
     "rimraf": "^2.6.2"
   }
 }
