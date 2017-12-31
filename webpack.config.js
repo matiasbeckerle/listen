@@ -12,11 +12,13 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
-        use: [
-          'babel-loader',
-          'ts-loader'
-        ]
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        loader: 'eslint-loader'
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader'
       }
     ]
   }
@@ -26,13 +28,13 @@ module.exports = [
   Object.assign(
     {
       target: 'electron-main',
-      entry: { main: './app/main.ts' }
+      entry: { main: './app/main.js' }
     },
     config),
   Object.assign(
     {
       target: 'electron-renderer',
-      entry: { ui: './app/ui.tsx' },
+      entry: { ui: './app/ui.jsx' },
       plugins: [new HtmlWebpackPlugin()]
     },
     config)
