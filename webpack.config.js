@@ -14,11 +14,13 @@ const config = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        loader: 'eslint-loader'
+        use: 'eslint-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
   }
