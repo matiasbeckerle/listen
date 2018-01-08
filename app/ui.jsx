@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App';
 
 ReactDOM.render(
-  <div>{process.versions.node}</div>,
+  <App />,
   document.getElementsByTagName('body')[0]);
