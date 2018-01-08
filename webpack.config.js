@@ -37,7 +37,9 @@ module.exports = [
     {
       target: 'electron-renderer',
       entry: { ui: './app/ui.jsx' },
-      plugins: [new HtmlWebpackPlugin()]
+      plugins: [
+        new HtmlWebpackPlugin({ template: './app/ui.html' })
+      ]
     },
     config)
 ];
