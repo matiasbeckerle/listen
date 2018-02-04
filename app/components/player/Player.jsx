@@ -5,14 +5,24 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleAudioElementRef = this.handleAudioElementRef.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.handlePrevious = this.handlePrevious.bind(this);
     this.handleNext = this.handleNext.bind(this);
   }
 
+  handleAudioElementRef(element) {
+    if (!element) return;
+    this.audio = element;
+  }
+
   handlePlayPause() {
     this.props.onPlayPause();
+    if (this.audio.paused)
+      this.audio.play();
+    else
+      this.audio.pause();
   }
 
   handleStop() {
@@ -30,7 +40,7 @@ class Player extends React.Component {
   render() {
     return (
       <div>
-        <audio controls>
+        <audio controls ref={this.handleAudioElementRef}>
           <source src="../app/temp/air.mp3" type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
@@ -60,6 +70,13 @@ class Player extends React.Component {
     );
   }
 }
+
+Player.defaultProps = {
+  onPlayPause: () => { },
+  onStop: () => { },
+  onPrevious: () => { },
+  onNext: () => { }
+};
 
 Player.propTypes = {
   onPlayPause: PropTypes.func,

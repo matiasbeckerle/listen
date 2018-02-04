@@ -16,12 +16,38 @@ test('<Player /> renders accurately', () => {
   expect(wrapper.find('.player-stop')).toHaveLength(1);
 });
 
-test('<Player /> Play/Pause button reacts to clicks', () => {
+test('<Player /> Play/Pause button starts playing when music is paused', () => {
+  // Arrange.
+  const onPlay = sinon.spy();
+  const audioElement = { paused: true, play: onPlay };
   const onButtonClick = sinon.spy();
   const wrapper = setup({ onPlayPause: onButtonClick });
+  wrapper.instance().handleAudioElementRef(audioElement);
   const playPauseButton = wrapper.find('.player-playpause');
+
+  // Act.
   playPauseButton.simulate('click');
+
+  // Assert.
   expect(onButtonClick.called).toBeTruthy();
+  expect(onPlay.called).toBeTruthy();
+});
+
+test('<Player /> Play/Pause button pauses when music is playing', () => {
+  // Arrange.
+  const onPause = sinon.spy();
+  const audioElement = { paused: false, pause: onPause };
+  const onButtonClick = sinon.spy();
+  const wrapper = setup({ onPlayPause: onButtonClick });
+  wrapper.instance().handleAudioElementRef(audioElement);
+  const playPauseButton = wrapper.find('.player-playpause');
+
+  // Act.
+  playPauseButton.simulate('click');
+
+  // Assert.
+  expect(onButtonClick.called).toBeTruthy();
+  expect(onPause.called).toBeTruthy();
 });
 
 test('<Player /> Stop button reacts to clicks', () => {
