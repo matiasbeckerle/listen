@@ -19,6 +19,7 @@ class Player extends React.Component {
 
   handlePlayPause() {
     this.props.onPlayPause();
+
     if (this.audio.paused)
       this.audio.play();
     else
@@ -27,6 +28,9 @@ class Player extends React.Component {
 
   handleStop() {
     this.props.onStop();
+
+    this.audio.pause();
+    this.audio.currentTime = 0;
   }
 
   handlePrevious() {

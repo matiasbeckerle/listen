@@ -51,11 +51,20 @@ test('<Player /> Play/Pause button pauses when music is playing', () => {
 });
 
 test('<Player /> Stop button reacts to clicks', () => {
+  // Arrange.
+  const onPause = sinon.spy();
+  const audioElement = { pause: onPause };
   const onButtonClick = sinon.spy();
   const wrapper = setup({ onStop: onButtonClick });
+  wrapper.instance().handleAudioElementRef(audioElement);
   const stopButton = wrapper.find('.player-stop');
+
+  // Act.
   stopButton.simulate('click');
+
+  // Assert.
   expect(onButtonClick.called).toBeTruthy();
+  expect(onPause.called).toBeTruthy();
 });
 
 test('<Player /> Previous button reacts to clicks', () => {
