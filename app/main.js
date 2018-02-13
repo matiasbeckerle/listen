@@ -1,12 +1,16 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import path from 'path';
 import url from 'url';
+import mainMenu from './menu';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win = null;
 
 function createWindow() {
+  const menu = Menu.buildFromTemplate(mainMenu);
+  Menu.setApplicationMenu(menu);
+
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 600 });
 
